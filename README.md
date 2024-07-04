@@ -1,7 +1,7 @@
 # Steam Review Crawler
 ## Python script that crawls steam user reviews using a 'appreviews' API and stores them into JSON files. 
 # 
-# Specifications:
+### Specifications:
 # - Each JSON file to contain no more than 5000 reviews
 # - Reviews formatted in specific JSON structure 
 # - Ensure each review appears once 
