@@ -6,7 +6,7 @@
 # - Ensure each review appears once 
 # - Generate unique IDs for each review
 # - Hash authors information
-# - Use object Orientated Programming (OOP) princibles 
+# - Use Object Orientated Programming (OOP) princibles 
 
 # Stretch Goals:
 # - Filter reviews based on dates
