@@ -29,3 +29,7 @@ class SteamReviewCrawler:
             if len(reviews) < 100: # No more reviews to retreive
                 break
         return data 
+    
+    def save_reviews_to_file(self, filename):
+        with open(filename, 'w') as file:
+            json.dump(self.reviews, file, indent = 4)
