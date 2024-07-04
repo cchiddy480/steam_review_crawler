@@ -16,4 +16,16 @@ class SteamReviewCrawler:
         params['num_per_page'] = 100
         cursor = '*'
         total_reviews = 0
-        
+        while total_reviews < 5000:
+            params['cursor'] = cursor
+            response = requests.get(url, params = params)
+            data = response.json()
+            reviews = data.get('reviews', [])
+            if not reviews:
+                break
+            self.reviews.extend(reviews)
+            total_reviews += len(reviews)
+            cursor = data.get('cursor', '*')
+            if len(reviews) < 100: # No more reviews to retreive
+                break
+        return data 
