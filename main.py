@@ -9,3 +9,11 @@ class SteamReviewCrawler:
         self.game_name = game_name # Attribute
         self.source = source       # Attribute
         self.app_id = app_id       # Attribute
+        self.reviews = []          # Attribute to store reviews 
+    
+    def fetch_reviews(self, params):
+        url = f'https://store.steampowered.com/appreviews/{self.app_id}'
+        params['num_per_page'] = 100
+        cursor = '*'
+        total_reviews = 0
+        
