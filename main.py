@@ -13,7 +13,7 @@ class SteamReviewCrawler:
     
     def fetch_reviews(self, params):
         url = f'https://store.steampowered.com/appreviews/{self.app_id}'
-        params = params
+        params['num_per_page'] = 100
         cursor = '*'
         total_reviews = 0
         while total_reviews < 5000:
@@ -36,10 +36,10 @@ class SteamReviewCrawler:
 
 # Sample Usage 
 if __name__ == "__main__":
-    crawler = SteamReviewCrawler("Franchise Name", "Game Name", "steam", "1382330")
+    crawler = SteamReviewCrawler("Franchise", "Game Name", "steam", "1382330")
     params = {
         'json' : 1,
-        'filter' : 'all'
+        'filter' : 'recent',
     }
     crawler.fetch_reviews(params)
     crawler.save_reviews_to_file('reviews.json')
