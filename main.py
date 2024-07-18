@@ -12,6 +12,8 @@ class SteamReviewCrawler:
         self.reviews = []          # Attribute to store reviews 
 
     def generate_unique_id(self, review):
+        # review_string = review['author']['steamid'] + review['review']
+        # return
         pass
     
     def fetch_reviews(self, params):
