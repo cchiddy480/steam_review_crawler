@@ -10,6 +10,9 @@ class SteamReviewCrawler:
         self.source = source       # Attribute
         self.app_id = app_id       # Attribute
         self.reviews = []          # Attribute to store reviews 
+
+    def generate_unique_id(self, review):
+        pass
     
     def fetch_reviews(self, params):
         url = f'https://store.steampowered.com/appreviews/{self.app_id}'
