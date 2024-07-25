@@ -13,10 +13,12 @@ class SteamReviewCrawler:
         self.reviews = []          # Attribute to store reviews 
 
     def generate_unique_id(self, review):
-        # review_string = review['author']['steamid'] + review['review']
-        # return hashlib.md5(review_string.encode()).hexdigest()
+        review_string = review['author']['steamid'] + review['review']
+        return hashlib.md5(review_string.encode()).hexdigest()
+        
+    def hash_author(self, author_id):
         pass
-    
+
     def fetch_reviews(self, params):
         url = f'https://store.steampowered.com/appreviews/{self.app_id}'
         params['num_per_page'] = 100
