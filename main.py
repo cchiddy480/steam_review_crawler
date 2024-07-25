@@ -51,6 +51,7 @@ class SteamReviewCrawler:
             reviews = data.get('reviews', [])
             if not reviews:
                 break
+            # < insert code update for JSON specified formatted review data>
             self.reviews.extend(reviews)
             total_reviews += len(reviews)
             cursor = data.get('cursor', '*')
