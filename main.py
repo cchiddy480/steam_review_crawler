@@ -12,11 +12,18 @@ class SteamReviewCrawler:
         self.app_id = app_id       # Attribute
         self.reviews = []          # Attribute to store reviews 
 
+    # Generates unique ID for each review using ther MD5 hash of the authors 
+    # steamid and review content 
     def generate_unique_id(self, review):
         review_string = review['author']['steamid'] + review['review']
         return hashlib.md5(review_string.encode()).hexdigest()
         
+    # Hashes the authors information using uuid    
     def hash_author(self, author_id):
+        return str(uuid.uuid5(uuid.NAMESPACE_DNS, author_id))
+    
+    # Formatting the review data according to specified JSON structure
+    def format_review(self, review):
         pass
 
     def fetch_reviews(self, params):
