@@ -36,7 +36,7 @@ class SteamReviewCrawler:
             "funny" : review.get('votes_funny', 0),
             "recommended" : review['voted_up'],
             "franchsie" : self.franchise,
-            "gameName" : self.game_name
+            "gameName" : self.game_name,
         }
 
     def fetch_reviews(self, params):
