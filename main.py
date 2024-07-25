@@ -24,7 +24,20 @@ class SteamReviewCrawler:
     
     # Formatting the review data according to specified JSON structure
     def format_review(self, review):
-        pass
+        return {
+            "id" : self.generate_unique_id(review),
+            "author" : self.hash_author(review['author']['steamid']),
+            "date" : review['timestamp_created'],
+            "hours" : review.get('author', {}).get('playtime_forever', 0),
+            "content" : review['review'],
+            "comments" : review.get['comment_count', 0],
+            "source" : self.source,
+            "helpful" : review.get('votes_up', 0),
+            "funny" : review.get('votes_funny', 0),
+            "recommended" : review['voted_up'],
+            "franchsie" : self.franchise,
+            "gameName" : self.game_name
+        }
 
     def fetch_reviews(self, params):
         url = f'https://store.steampowered.com/appreviews/{self.app_id}'
