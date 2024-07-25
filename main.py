@@ -30,12 +30,12 @@ class SteamReviewCrawler:
             "date" : review['timestamp_created'],
             "hours" : review.get('author', {}).get('playtime_forever', 0),
             "content" : review['review'],
-            "comments" : review.get['comment_count', 0],
+            "comments" : review.get('comment_count', 0),
             "source" : self.source,
             "helpful" : review.get('votes_up', 0),
             "funny" : review.get('votes_funny', 0),
             "recommended" : review['voted_up'],
-            "franchsie" : self.franchise,
+            "franchise" : self.franchise,
             "gameName" : self.game_name,
         }
 
