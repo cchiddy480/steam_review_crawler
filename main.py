@@ -1,6 +1,7 @@
 import requests
 import json
 import uuid
+import hashlib
 from datetime import datetime 
 
 class SteamReviewCrawler:
@@ -13,7 +14,7 @@ class SteamReviewCrawler:
 
     def generate_unique_id(self, review):
         # review_string = review['author']['steamid'] + review['review']
-        # return
+        # return hashlib.md5(review_string.encode()).hexdigest()
         pass
     
     def fetch_reviews(self, params):
