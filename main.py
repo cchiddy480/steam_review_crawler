@@ -66,10 +66,16 @@ class SteamReviewCrawler:
 
 # Sample Usage 
 if __name__ == "__main__":
-    crawler = SteamReviewCrawler("Franchise", "Game Name", "steam", "1382330")
+    crawler = SteamReviewCrawler("Persona", "Persona 5 Strikers", "steam", "1382330")
     params = {
         'json' : 1,
         'filter' : 'recent',
     }
     crawler.fetch_reviews(params)
     crawler.save_reviews_to_file('reviews.json')
+
+    # Testing for the correct number of reviews saved to the reviews.json file 
+    # Does not exceed 5000
+    reviews_data = open('reviews.json')
+    review_count_data = json.load(reviews_data)
+    print(len(review_count_data))
