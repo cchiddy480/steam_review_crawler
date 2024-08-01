@@ -27,7 +27,7 @@ class SteamReviewCrawler:
         return {
             "id" : self.generate_unique_id(review),
             "author" : self.hash_author(review['author']['steamid']),
-            "date" : review['timestamp_created'],
+            "date" : datetime.fromtimestamp(review['timestamp_created']).strftime('%y-%m-%d'),
             "hours" : review.get('author', {}).get('playtime_forever', 0),
             "content" : review['review'],
             "comments" : review.get('comment_count', 0),
@@ -36,9 +36,10 @@ class SteamReviewCrawler:
             "funny" : review.get('votes_funny', 0),
             "recommended" : review['voted_up'],
             "franchise" : self.franchise,
-            "gameName" : self.game_name,
+            "gameName" : self.game_name, 
         }
-
+    
+    # Fetching and storing reviews from the stean review API in a loop
     def fetch_reviews(self, params):
         url = f'https://store.steampowered.com/appreviews/{self.app_id}'
         params['num_per_page'] = 100
