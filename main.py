@@ -40,11 +40,13 @@ class SteamReviewCrawler:
         }
     
     # Fetching and storing reviews from the stean review API in a loop
-    def fetch_reviews(self, params):
+    def fetch_reviews(self, params, start_date=None, end_date=None):
         url = f'https://store.steampowered.com/appreviews/{self.app_id}'
         params['num_per_page'] = 100
         cursor = '*'
         total_reviews = 0
+        start_timestamp = datetime.strptime(start_date, '%y-%m-%d').timestamp() if start_date else None
+        end_timestamp = datetime.strptime(end_date, '%y-%m-%d').timestamp() if end_date else None
         while total_reviews < 5000:
             params['cursor'] = cursor
             response = requests.get(url, params = params)
@@ -52,13 +54,17 @@ class SteamReviewCrawler:
             reviews = data.get('reviews', [])
             if not reviews:
                 break
-            formatted_reviews = [self.format_review(review) for review in reviews]
-            self.reviews.extend(formatted_reviews)
-            total_reviews += len(reviews)
-            cursor = data.get('cursor', '*')
-            if len(reviews) < 100: # No more reviews to retreive
-                break
-        return data 
+            for review in reviews:
+                review_timestamp = review['timestamp_created']
+                if (start_timestamp and review_timestamp < start_timestamp) or (end_timestamp and review_timestamp > end_timestamp):
+                    continue
+                formatted_reviews = [self.format_review(review) for review in reviews]
+                self.reviews.extend(formatted_reviews)
+                total_reviews += len(reviews)
+                cursor = data.get('cursor', '*')
+                if len(reviews) < 100: # No more reviews to retreive
+                    break
+            return data 
     
     def save_reviews_to_file(self, filename):
         with open(filename, 'w') as file:
@@ -76,6 +82,6 @@ if __name__ == "__main__":
 
     # Testing for the correct number of reviews saved to the reviews.json file 
     # Does not exceed 5000
-    reviews_data = open('reviews.json')
-    review_count_data = json.load(reviews_data)
-    print(len(review_count_data))
+    # reviews_data = open('reviews.json')
+    # review_count_data = json.load(reviews_data)
+    # print(len(review_count_data))
